@@ -1,14 +1,16 @@
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
-    
+input.onButtonPressed(Button.A, function () {
     IsDrivingEnabled = true
 })
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    
+input.onButtonPressed(Button.B, function () {
     IsDrivingEnabled = false
 })
 let IsDrivingEnabled = false
-fwdMotors.setupDriving(fwdMotors.leftServo, fwdMotors.rightServo, 0)
-basic.forever(function on_forever() {
+fwdMotors.setupDriving(
+fwdMotors.leftServo,
+fwdMotors.rightServo,
+0
+)
+basic.forever(function () {
     if (IsDrivingEnabled) {
         if (fwdSensors.sonar1.fwdDistancePastThreshold(0.5, fwdSensors.ThresholdDirection.Under)) {
             fwdMotors.stop()
@@ -20,9 +22,7 @@ basic.forever(function on_forever() {
         } else {
             fwdMotors.drive(fwdMotors.DrivingDirection.Forward, 50)
         }
-        
     } else {
         fwdMotors.stop()
     }
-    
 })
